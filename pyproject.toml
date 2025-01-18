@@ -1,0 +1,15 @@
+[project]
+name = "puzzles"
+version = "1.0.0"
+description = "Задачки с сайтов"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "icecream>=2.1.4",
+    "ipython>=8.31.0",
+    "notebook>=7.3.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
