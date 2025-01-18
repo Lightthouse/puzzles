@@ -12,7 +12,7 @@
 # ключи словаря : отсортированные по буквам слова
 # значения словаря : список слов до сортировки
 # вернем список значений словаря
-
+from typing import List
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         ang_dict = dict()
