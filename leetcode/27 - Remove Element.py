@@ -18,6 +18,6 @@ class Solution:
                 nums.remove(val)
                 removed_elements += 1
             except ValueError:
-                break;
+                break
 
         return input_length - removed_elements
