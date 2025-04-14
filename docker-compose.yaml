@@ -1,0 +1,26 @@
+services:
+
+  maria_db:
+    image: mariadb
+    restart: no
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admin
+      MARIADB_DATABASE: puzzle
+
+  pg_db:
+    image: postgres
+    restart: no
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: admin
+      POSTGRES_DB: puzzle
+
+  adminer:
+    image: adminer
+    restart: no
+    ports:
+      - 8085:8080
+
