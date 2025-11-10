@@ -10,17 +10,25 @@ services:
       MARIADB_DATABASE: puzzle
 
   pg_db:
-    image: postgres
+    image: postgres:18-alpine
     restart: no
     shm_size: 128mb
     environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pg_password
+      POSTGRES_USER: stephan
       POSTGRES_DB: puzzle
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./pg_init:/docker-entrypoint-initdb.d
 
   adminer:
     image: adminer
     restart: no
     ports:
       - 8085:8080
+
+volumes:
+  pg_data:
 

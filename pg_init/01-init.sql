@@ -1,0 +1,1 @@
+CREATE SCHEMA IF NOT EXISTS puzzle; CREATE TABLE puzzle.users ( id SERIAL PRIMARY KEY, name TEXT );
