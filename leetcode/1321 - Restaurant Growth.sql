@@ -13,8 +13,33 @@ insert into Customer (customer_id, name, visited_on, amount) values ('1', 'Jhon'
 insert into Customer (customer_id, name, visited_on, amount) values ('3', 'Jade', '2019-01-10', '150');
 
 
+WITH daily_totals AS (
+    SELECT
+        visited_on,
+        SUM(amount) AS daily_amount
+    FROM Customer
+    GROUP BY visited_on
+),
+moving_averages AS (
+    SELECT
+        visited_on,
+        SUM(daily_amount) OVER (
+            ORDER BY visited_on
+            ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+        ) AS total_amount,
+        AVG(daily_amount) OVER (
+            ORDER BY visited_on
+            ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+        ) AS average_amount,
+        ROW_NUMBER() OVER (ORDER BY visited_on) AS row_num
+    FROM daily_totals
+)
 
-select
-    customer_id, name, visited_on, amount,
-    ntile(7) over (partition by amount order by visited_on)
-from Customer
+
+SELECT
+    visited_on,
+    total_amount,
+    ROUND(average_amount, 2) AS average_amount
+FROM moving_averages
+WHERE row_num >= 7
+ORDER BY visited_on;
